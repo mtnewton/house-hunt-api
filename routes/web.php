@@ -13,6 +13,11 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->post('/auth', ['uses' => 'AuthController']);
+
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+
+    $router->get('/me', ['uses' => 'MeController']);
+
 });
